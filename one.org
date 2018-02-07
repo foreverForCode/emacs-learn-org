@@ -1,2 +1,163 @@
 * 学习commonlisp的重要知识总结
-** 
+** 基本已定义函数
+   
+   list 定义表
+   
+   cons 构造列表由两个参数组成
+
+   car 返回列表的第一个元素
+
+   cdr 返回列表中的除了第一个的所有元素
+
+   defun 定义函数
+
+   eql   是否相等
+
+   format  标准输出
+
+   read 读取字符
+
+   let  定义局部变量
+   #+BEGIN_SRC SRC_TYPE LISP
+        (let ((n 10)))
+   #+END_SRC
+
+   defparameter 定义全局变量 
+
+   #+BEGIN_SRC SRC_TYPE lisp
+        (defparameter *glob* 99)
+   #+END_SRC
+
+   boundp 判断是否是全局变量
+   #+BEGIN_SRC SRC_TYPE LISP
+        (boundp '*glob*)
+   #+END_SRC
+   
+
+   remove 移除列表的存在的原子
+
+   progn 接受任意数量的表达式，依序求值，并返回最后一个表达式的值
+
+   dolist 遍历列表
+   
+   #+BEGIN_SRC SRC_TYPE LISP
+   (defun our-length (lst)
+     (let ((len 0))
+       (dolist (obj lst)
+          (setf len (+ len 1)))
+             len))
+   #+END_SRC
+   
+
+   apply 接受任意数量的实参，只要最后一个实参是列表即可
+   
+    #+BEGIN_SRC SRC_TYPE LISP
+        (apply #'+ '(1 2 3))
+    #+END_SRC
+
+   funcall 接受任意数量的实参，但不需要把实参包装成列表
+
+    #+BEGIN_SRC SRC_TYPE LISP
+        (funcall #'+ 1 2 3)
+    #+END_SRC
+   
+   lambda 
+    #+BEGIN_SRC SRC_TYPE LISP
+        (lambda (x y)
+          (+ x y))
+    #+END_SRC
+
+   #' 引用函数
+   
+    #+BEGIN_SRC SRC_TYPE LISP
+        (funcall #'(lambda (x y)
+          (+ x y)) 1 2)
+    #+END_SRC
+
+   car 获取表的第一个
+
+   cdr 获取表的除了第一个的剩下的
+
+   nth 获取表内的原子(从0开始)
+    #+BEGIN_SRC SRC_TYPE LISP
+        (nth 0 '(a b c))
+    #+END_SRC
+
+   nthcdr 找到第n个cdr
+
+   last 返回列表的最后一个Cons对象
+    #+BEGIN_SRC SRC_TYPE LISP
+        (last '(a b c))
+    #+END_SRC
+
+   mapcar 提供了数个函数来对一个列表的元素做函数调用，接受一个函数以及一个或多个列表
+          并返回把函数应用至每个列表的元素的结果，直到有的列表没有元素
+
+    #+BEGIN_SRC SRC_TYPE LISP
+      (mapcar #'(lambda (x) (+ x 10)) '(1 2 3))
+    #+END_SRC
+
+    maplist 将列表的渐进的下一个cdr传入函数
+
+    #+BEGIN_SRC SRC_TYPE LISP
+      (maplist #'(lambda (x) x) '(1 2 3))
+    #+END_SRC
+
+	member 返回有寻找对象开始的那部分
+
+    #+BEGIN_SRC SRC_TYPE LISP
+       (member 'b '(a b c))  => (b c)
+    #+END_SRC
+
+	member-if 
+
+    #+BEGIN_SRC SRC_TYPE LISP
+	(member-if #'oddp '(2 3 4))
+    #+END_SRC
+
+	adjoin 如果对象还不是列表的成员，才构造对象至列表上
+
+	union 并集  intersection 交集  complement 补集
+
+	length 返回列表中元素的数目
+
+	subseq 复制序列的一部分
+
+	reverse 顺序颠倒
+
+	sort 接受一个序列以及一个比较两个参数的函数，并返回一个有同样元素的序列，根据比较         函数来排序
+
+	#+BEGIN_SRC SRC_TYPE LISP
+        (sort '(0 2 1 2 3 4) #'>)
+    #+END_SRC
+
+	every and some 接受一个判断式以及一个或多个序列
+
+	push 
+
+	pop
+
+	assoc 关联列表
+
+	make-array 构造一个数组
+
+	aref 取出数组的元素
+
+	vector 向量
+
+	svref 存取向量
+
+	
+
+
+
+	
+
+
+
+   
+
+   
+   
+    
+    
